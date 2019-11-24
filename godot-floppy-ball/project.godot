@@ -1,0 +1,52 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "StaticBody2D",
+"class": "Wall",
+"language": "GDScript",
+"path": "res://Wall.gd"
+}, {
+"base": "Reference",
+"class": "WallManager",
+"language": "GDScript",
+"path": "res://WallManager.gd"
+} ]
+_global_script_class_icons={
+"Wall": "",
+"WallManager": ""
+}
+
+[application]
+
+config/name="Floppy Ball"
+run/main_scene="res://World.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+GameState="*res://GameState.gd"
+
+[display]
+
+window/size/width=800
+window/size/resizable=false
+
+[layer_names]
+
+2d_physics/layer_2="left_wall"
+
+[physics]
+
+2d/default_linear_damp=9.8
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

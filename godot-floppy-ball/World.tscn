@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://World.gd" type="Script" id=1]
+[ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 410.578, 2.43219 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 304 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 301.138 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Ball" parent="." instance=ExtResource( 2 )]
+position = Vector2( 126.265, 90.5975 )
+collision_mask = 3
+
+[node name="score_wall" type="StaticBody2D" parent="."]
+editor/display_folded = true
+
+[node name="upper wall" type="CollisionShape2D" parent="score_wall"]
+position = Vector2( 397.53, -0.0397949 )
+shape = SubResource( 1 )
+
+[node name="lower wall" type="CollisionShape2D" parent="score_wall"]
+position = Vector2( 399.705, 601.717 )
+shape = SubResource( 1 )
+
+[node name="right_wall" type="StaticBody2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_wall"]
+position = Vector2( 808.998, 297.999 )
+shape = SubResource( 2 )
+
+[node name="left_wall" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( -6.85907, -28.2933 )
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_wall"]
+position = Vector2( -3.33698, 328.374 )
+shape = SubResource( 3 )
+
+[node name="hud" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="score" type="Label" parent="hud"]
+margin_right = 51.0
+margin_bottom = 14.0
+text = "Score: 0"
