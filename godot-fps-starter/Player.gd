@@ -63,15 +63,6 @@ func process_input(delta : float):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		print(Input.get_mouse_mode())
 	
-func decrease_over_time(from : float, to : float, duration : float, delta : float) -> float:
-	var ret = to
-	
-	if(from > to):
-		var approximate_step = duration * delta
-		ret = from - approximate_step
-	
-	return ret
-	
 func process_movement(delta : float):
 	# https://docs.godotengine.org/en/3.1/tutorials/3d/fps_tutorial/part_one.html#tutorial-introduction
 	
