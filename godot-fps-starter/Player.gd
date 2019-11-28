@@ -4,6 +4,7 @@ const GRAVITY = -24.8
 const MAX_SPEED = 20
 const JUMP_SPEED = 18
 const JUMP_DURATION = 2
+const SPRINT_SPEED = 30
 
 const ACCEL = 4.5
 const DEACCEL = 16
@@ -14,6 +15,7 @@ var direction : Vector3
 
 onready var camera = $Rotation_Helper/Camera
 onready var rotation_helper = $Rotation_Helper
+onready var flashlight = $Rotation_Helper/Flashlight
 
 const MOUSE_SENSITIVITY = 0.05
 
@@ -55,6 +57,12 @@ func process_input(delta : float):
 		if Input.is_action_just_pressed("movement_jump"):
 			velocity.y = JUMP_SPEED
 			
+	if Input.is_action_just_pressed("flashlight"):
+		if flashlight.is_visible_in_tree():
+			flashlight.hide()
+		else:
+			flashlight.show()
+			
 	# Capture/free cursor
 	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
@@ -69,18 +77,17 @@ func process_movement(delta : float):
 	# Decrease vertical velocity each frame to end a jump
 	velocity.y += GRAVITY * delta
 	
-	print(velocity.y)
+	var xz_plane_velocity : Vector3 = velocity
+	xz_plane_velocity.y = 0
 	
-	var horizontal_velocity : Vector3 = velocity
-	horizontal_velocity.y = 0
+	var target : Vector3 = direction * (SPRINT_SPEED if Input.is_action_pressed("movement_sprint") else MAX_SPEED)
 	
-	var target : Vector3 = direction * MAX_SPEED
-	
-	var acceleration = ACCEL if direction.dot(horizontal_velocity) > 0 else DEACCEL
-		
-	horizontal_velocity = horizontal_velocity.linear_interpolate(target, acceleration * delta)
-	velocity.x = horizontal_velocity.x
-	velocity.z = horizontal_velocity.z
+	var acceleration = ACCEL if direction.dot(xz_plane_velocity) > 0 else DEACCEL
+
+	xz_plane_velocity = xz_plane_velocity.linear_interpolate(target, acceleration * delta)
+
+	velocity.x = xz_plane_velocity.x
+	velocity.z = xz_plane_velocity.z
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
 
