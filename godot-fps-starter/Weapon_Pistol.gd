@@ -4,42 +4,70 @@ const DAMAGE = 15
 
 const IDLE_ANIM_NAME = "Pistol_idle"
 const FIRE_ANIM_NAME = "Pistol_fire"
+const AMMO_IN_MAG : int = 10
 
 var is_weapon_enabled = false
+var ammo_in_weapon : int = 10
+var spare_ammo : int = 20
+var CAN_RELOAD := true
+var CAN_REFILL := true
+const RELOADING_ANIM_NAME = "Pistol_reload"
 
 var bullet_scene = preload("Bullet_Scene.tscn")
 
 var player_node = null
 
 func _ready():
-    pass
+	pass
 
 func fire_weapon():
-    var clone = bullet_scene.instance()
-    var scene_root = get_tree().root.get_children()[0]
-    scene_root.add_child(clone)
+	var clone = bullet_scene.instance()
+	var scene_root = get_tree().root.get_children()[0]
+	scene_root.add_child(clone)
 
-    clone.global_transform = self.global_transform
-    clone.scale = Vector3(4, 4, 4)
-    clone.BULLET_DAMAGE = DAMAGE
+	clone.global_transform = self.global_transform
+	clone.scale = Vector3(4, 4, 4)
+	clone.BULLET_DAMAGE = DAMAGE
+	ammo_in_weapon -= 1
+	player_node.create_sound("Pistol_shot", self.global_transform.origin)
 
 func equip_weapon():
-    if player_node.animation_manager.current_state == IDLE_ANIM_NAME:
-        is_weapon_enabled = true
-        return true
+	if player_node.animation_manager.current_state == IDLE_ANIM_NAME:
+		is_weapon_enabled = true
+		return true
 
-    if player_node.animation_manager.current_state == "Idle_unarmed":
-        player_node.animation_manager.set_animation("Pistol_equip")
+	if player_node.animation_manager.current_state == "Idle_unarmed":
+		player_node.animation_manager.set_animation("Pistol_equip")
 
-    return false
+	return false
 
 func unequip_weapon():
-    if player_node.animation_manager.current_state == IDLE_ANIM_NAME:
-        if player_node.animation_manager.current_state != "Pistol_unequip":
-            player_node.animation_manager.set_animation("Pistol_unequip")
+	if player_node.animation_manager.current_state == IDLE_ANIM_NAME:
+		if player_node.animation_manager.current_state != "Pistol_unequip":
+			player_node.animation_manager.set_animation("Pistol_unequip")
 
-    if player_node.animation_manager.current_state == "Idle_unarmed":
-        is_weapon_enabled = false
-        return true
-    else:
-        return false
+	if player_node.animation_manager.current_state == "Idle_unarmed":
+		is_weapon_enabled = false
+		return true
+	else:
+		return false
+		
+func reload_weapon():
+	var can_reload = false
+	
+	if player_node.animation_manager.current_state == IDLE_ANIM_NAME:
+		can_reload = true
+		
+	if spare_ammo <= 0 || ammo_in_weapon == AMMO_IN_MAG:
+		can_reload = false
+	
+	if can_reload:
+		var ammo_needed = AMMO_IN_MAG - ammo_in_weapon
+		var take = min(ammo_needed, spare_ammo)
+		spare_ammo -= take
+		ammo_in_weapon += take
+		
+		player_node.animation_manager.set_animation(RELOADING_ANIM_NAME)
+		player_node.create_sound("Gun_cock", self.global_transform.origin)
+		
+	return can_reload

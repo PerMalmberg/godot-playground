@@ -174,7 +174,6 @@ environment = SubResource( 7 )
 [node name="Cubes" type="Spatial" parent="."]
 
 [node name="PurpleCube" type="RigidBody" parent="Cubes"]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.95316, 23.1277 )
 mass = 5.0
 gravity_scale = 3.0
