@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1t3mqtoct1lh"]
+
+[ext_resource type="Script" path="res://scene/fogofwar/RevealerBehavior.gd" id="1_sx4b2"]
+
+[node name="RevealerBehavior" type="Node"]
+script = ExtResource("1_sx4b2")

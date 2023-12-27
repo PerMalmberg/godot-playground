@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://sunm8s0boroh"]
+
+[ext_resource type="Script" path="res://scene/fogofwar/FoWTestScene.gd" id="1_qjyiy"]
+[ext_resource type="PackedScene" uid="uid://dhcpn2cbuyiqu" path="res://scene/fogofwar/FogOfWar.tscn" id="2_hfi7q"]
+[ext_resource type="Script" path="res://scene/fogofwar/fps.gd" id="3_rp8yr"]
+[ext_resource type="Texture2D" uid="uid://c8cepf1qsak5x" path="res://icon.svg" id="3_uhlk6"]
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource("1_qjyiy")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="Label" type="Label" parent="Control/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_rp8yr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(597, 313)
+texture = ExtResource("3_uhlk6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(932, 462)
+texture = ExtResource("3_uhlk6")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(938, 250)
+texture = ExtResource("3_uhlk6")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(275, 488)
+texture = ExtResource("3_uhlk6")
+
+[node name="Scuttlers" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="FogOfWar" parent="." instance=ExtResource("2_hfi7q")]

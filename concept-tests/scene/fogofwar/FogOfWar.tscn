@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhcpn2cbuyiqu"]
+
+[ext_resource type="Script" path="res://scene/fogofwar/FogOfWar.gd" id="1_16jpx"]
+[ext_resource type="Shader" path="res://scene/fogofwar/FogOfWar.gdshader" id="2_7rfh3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ww8ex"]
+shader = ExtResource("2_7rfh3")
+
+[sub_resource type="Image" id="Image_be4wp"]
+data = {
+"data": PackedByteArray(0, 255, 0, 255, 0, 255, 0, 255),
+"format": "LumAlpha8",
+"height": 2,
+"mipmaps": false,
+"width": 2
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_37bg8"]
+image = SubResource("Image_be4wp")
+
+[node name="FogOfWar" type="Node2D"]
+script = ExtResource("1_16jpx")
+
+[node name="fogSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ww8ex")
+position = Vector2(1, 1)
+texture = SubResource("ImageTexture_37bg8")

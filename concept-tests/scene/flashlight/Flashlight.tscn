@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://57o8j1gpwlj6"]
+
+[ext_resource type="Texture2D" uid="uid://bu7o4n628kkkd" path="res://scene/flashlight/flashlight.png" id="1_m2gno"]
+[ext_resource type="Script" path="res://scene/flashlight/Flashlight.gd" id="2_w37oj"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("2_w37oj")
+
+[node name="Light" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+color = Color(0.666667, 0.776471, 1, 1)
+shadow_enabled = true
+texture = ExtResource("1_m2gno")
+offset = Vector2(128, 0)
+
+[node name="FakeCone" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(128, 0)
+texture = ExtResource("1_m2gno")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Light"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(128, 0)
+polygon = PackedVector2Array(-128, 0, 128, 128, 128, -128, -62.6471, -32.6765)

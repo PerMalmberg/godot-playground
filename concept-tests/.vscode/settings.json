@@ -1,0 +1,16 @@
+{
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": false,
+    "cSpell.enableFiletypes": [
+        "gdscript"
+    ],
+    "cSpell.words": [
+        "inout",
+        "onready",
+        "randf",
+        "tscn"
+    ],
+    "godotTools.lsp.headless": true
+}

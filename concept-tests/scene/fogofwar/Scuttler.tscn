@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc5kf2tvtyh3j"]
+
+[ext_resource type="Script" path="res://scene/fogofwar/Scuttler.gd" id="1_ml8c5"]
+[ext_resource type="PackedScene" uid="uid://c1t3mqtoct1lh" path="res://scene/fogofwar/RevealerBehavior.tscn" id="2_xp51s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k3rtf"]
+radius = 16.0
+
+[node name="Scuttler" type="RigidBody2D"]
+script = ExtResource("1_ml8c5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k3rtf")
+
+[node name="RevealerBehavior" parent="." instance=ExtResource("2_xp51s")]

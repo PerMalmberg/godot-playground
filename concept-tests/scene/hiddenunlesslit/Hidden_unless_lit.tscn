@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp5vhnbcd1vhr"]
+
+[ext_resource type="Texture2D" uid="uid://c8cepf1qsak5x" path="res://icon.svg" id="1_ll0s7"]
+[ext_resource type="Script" path="res://scene/hiddenunlesslit/HiddenUnlessLit.gd" id="2_t806w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_832fi"]
+size = Vector2(122.88, 122.88)
+
+[node name="HiddenUnlessLit" type="Sprite2D"]
+position = Vector2(529, 464)
+scale = Vector2(0.390625, 0.390625)
+texture = ExtResource("1_ll0s7")
+script = ExtResource("2_t806w")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_832fi")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

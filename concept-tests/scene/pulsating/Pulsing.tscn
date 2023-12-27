@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmv0u46btdo2w"]
+
+[ext_resource type="Script" path="res://scene/pulsating/oscillate.gd" id="1_cabaj"]
+[ext_resource type="Shader" path="res://scene/pulsating/body.gdshader" id="2_otdpb"]
+[ext_resource type="Texture2D" uid="uid://bqmskihuw8ffo" path="res://white_circle_64x64.png" id="2_qmv6f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wv0h"]
+shader = ExtResource("2_otdpb")
+shader_parameter/color = Color(0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_2koq7"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r6lh1"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_2koq7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.154, 0.154)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_cabaj")
+
+[node name="Body" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2wv0h")
+texture = ExtResource("2_qmv6f")
+
+[node name="PulsatingLight" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1.5, 1.5, 1.5, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_r6lh1")
